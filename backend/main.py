@@ -1,20 +1,27 @@
 import os
 import io
+import sys
 import json
 import random
+from pathlib import Path
+
+# Force UTF-8 stdout so emoji/Unicode in print() don't crash on Windows (cp1252)
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from pinecone import Pinecone
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
-from pypdf import PdfReader 
+from pypdf import PdfReader
 
 load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
-app = FastAPI()
+app = FastAPI(title="NYAYA.ai Legal Intelligence API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,6 +31,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# (Static file mounting moved to the end of the file to avoid intercepting API routes)
+
 # 1. Setup Pinecone & Embeddings
 try:
     pc = Pinecone(api_key=PINECONE_API_KEY)
@@ -31,7 +40,7 @@ try:
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
     DB_STATUS = True
 except:
-    print("⚠️ Database offline. Switching to Pure AI Mode.")
+    print("[WARNING] Database offline. Switching to Pure AI Mode.")
     DB_STATUS = False
 
 # 2. THE PROFESSIONAL BRAIN
@@ -168,7 +177,7 @@ async def analyze_pdf(file: UploadFile = File(...)):
 # --- SEARCH ENDPOINT ---
 @app.get("/search")
 async def search_law(query: str, mode: str = "constitution", lang: str = "en"):
-    print(f"\n🔎 User asked: {query} [Mode: {mode}, Lang: {lang}]")
+    print(f"\n[SEARCH] User asked: {query} [Mode: {mode}, Lang: {lang}]")
 
     lang_instruction = "Answer in Hindi (Devanagari script) mixed with English legal terms (Hinglish) where appropriate." if lang == "hi" else "Answer in professional English."
 
@@ -256,3 +265,14 @@ async def search_law(query: str, mode: str = "constitution", lang: str = "en"):
         return {"result": response.content, "source": f"Source: {', '.join(sources)}"}
     except Exception as e:
         return {"result": f"System Error: {str(e)}", "source": "System"}
+
+
+# ── Serve Frontend Static Files (MUST BE LAST) ───────────────────────────────
+FRONTEND_DIR = Path(__file__).parent.parent / "frontend"
+
+@app.get("/")
+async def serve_root():
+    return FileResponse(str(FRONTEND_DIR / "index.html"))
+
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")

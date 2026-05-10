@@ -1100,7 +1100,11 @@ body.light-mode #bg-video {
     </div>
 
     <script>
-        const API_URL = "http://127.0.0.1:8000"; 
+        /* API_URL: 
+           - Empty string ""  → same origin (when served from FastAPI at port 8000 via http://localhost:8000)
+           - "http://127.0.0.1:8000" → explicit local backend
+           - "https://jain-mayukh-samvidhan-ai.hf.space" → deployed HuggingFace backend */
+        const API_URL = ""; // Same-origin: served by FastAPI at localhost:8000
         let currentMode = "constitution"; 
         let currentLang = 'EN';
 
@@ -1485,7 +1489,7 @@ body.light-mode #bg-video {
             } catch (error) {
                 const loader = document.getElementById(loadingId);
                 if(loader) loader.remove();
-                addMessage("⚠️ Connection error. Please ensure backend is running.", "bot", false, activeTabId);
+                addMessage(`⚠️ **Backend Unavailable.** To run NYAYA.ai locally:\n\n1. Add your API keys to \`backend/.env\`\n   - **GROQ_API_KEY** → [Get free key](https://console.groq.com/keys)\n   - **PINECONE_API_KEY** → [Get free key](https://app.pinecone.io)\n\n2. Double-click \`start.bat\` in the project root\n\n3. Refresh this page\n\n> Alternatively, the deployed version is at [samvidhan-ai-psi.vercel.app](https://samvidhan-ai-psi.vercel.app/)`, "bot", false, activeTabId);
             }
         }
 
