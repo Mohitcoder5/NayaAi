@@ -12,6 +12,8 @@
 
 🚀 **Live Deployment:** [Deployed on Render](https://nayaai.onrender.com/)
 
+https://nayaai.onrender.com/
+
 > ⚠️ *Note:* Due to free-tier cloud hosting, the server may take ~50 seconds to spin up if it hasn't been used recently.
 
 ---
