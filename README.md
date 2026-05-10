@@ -10,7 +10,7 @@
 
 ## 🌐 Live Demo
 
-🚀 **Live Deployment:** [Deployed on Render](https://naya-ai.onrender.com/) *(Make sure to replace this link with your actual Render URL if it differs)*
+🚀 **Live Deployment:** [Deployed on Render](https://nayaai.onrender.com/)
 
 > ⚠️ *Note:* Due to free-tier cloud hosting, the server may take ~50 seconds to spin up if it hasn't been used recently.
 
@@ -163,6 +163,7 @@ This project is distributed under the **MIT License**. See the `LICENSE` file fo
 **Mohit** 
 
 * [**GitHub - Mohitcoder5**](https://github.com/Mohitcoder5)
+* [**Email**](mailto:mohitpatil.50m@gmail.com)
 
 ---
 
