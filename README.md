@@ -10,9 +10,7 @@
 
 ## 🌐 Live Demo
 
-🚀 **Frontend:** https://samvidhan-ai-psi.vercel.app/
-
-⚙️ **Backend API:** https://jain-mayukh-samvidhan-ai.hf.space
+https://nayaai.onrender.com/
 
 > ⚠️ *Note:* The backend may take a few seconds to wake up on first request due to free-tier hosting.
 
