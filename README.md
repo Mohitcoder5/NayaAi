@@ -1,8 +1,8 @@
-# ⚖️ NYAYA.ai: Legal Intelligence for The Next Generation
+# ⚖️ NayaAi: Legal Intelligence for The Next Generation
 
 ![Status](https://img.shields.io/badge/status-active-success.svg) ![Python](https://img.shields.io/badge/python-3.11-blue.svg) ![FastAPI](https://img.shields.io/badge/FastAPI-v0.100+-005571.svg) ![LLM](https://img.shields.io/badge/LLM-Llama--3.3--70B-orange) ![Pinecone](https://img.shields.io/badge/Vector%20DB-Pinecone-blueviolet)
 
-**NYAYA.ai** is a revolutionary, full-stack legal companion designed to democratize justice. By leveraging **Retrieval-Augmented Generation (RAG)**, it simplifies complex legal procedures, providing citizens and professionals with instant, accurate insights into the Indian Constitution and the new **Bhartiya Nyaya Sanhita (BNS)**.
+**NayaAi** is a revolutionary, full-stack legal companion designed to democratize justice. By leveraging **Retrieval-Augmented Generation (RAG)**, it simplifies complex legal procedures, providing citizens and professionals with instant, accurate insights into the Indian Constitution and the new **Bhartiya Nyaya Sanhita (BNS)**.
 
 > **"Justice Democratized."**
 
@@ -10,9 +10,9 @@
 
 ## 🌐 Live Demo
 
-https://nayaai.onrender.com/
+🚀 **Live Deployment:** [Deployed on Render](https://naya-ai.onrender.com/) *(Make sure to replace this link with your actual Render URL if it differs)*
 
-> ⚠️ *Note:* The backend may take a few seconds to wake up on first request due to free-tier hosting.
+> ⚠️ *Note:* Due to free-tier cloud hosting, the server may take ~50 seconds to spin up if it hasn't been used recently.
 
 ---
 
@@ -56,7 +56,7 @@ An advanced chat interface for deep legal querying, document analysis, and simpl
 
 ## 🏗️ Technical Architecture (RAG Pipeline)
 
-NYAYA.ai ensures legal precision by eliminating AI hallucinations through a verified Retrieval-Augmented Generation pipeline:
+NayaAi ensures legal precision by eliminating AI hallucinations through a verified Retrieval-Augmented Generation pipeline:
 
 1.  **Vectorization:** Legal datasets (Constitution, BNS Acts, 15,000+ Precedents) are converted into high-dimensional vectors using `all-mpnet-base-v2`.
 2.  **Storage:** Vectors are indexed in a **Pinecone Vector Database** for sub-second similarity retrieval.
@@ -68,17 +68,18 @@ NYAYA.ai ensures legal precision by eliminating AI hallucinations through a veri
 ## 📂 Project Structure
 
 ```
-samvidhan-ai/
+NayaAi/
 ├── backend/            # FastAPI Server
 │   ├── main.py         # Primary API endpoints
 │   ├── venv/           # Virtual Environment
-│   ├── .env            # API Keys (Protected)
+│   ├── .env.example    # API Keys template
 │   └── requirements.txt
 ├── frontend/           # UI Workspace
 │   ├── index.html      # Main Dashboard
 │   ├── style.css       # Glassmorphism UI logic
 │   └── script.js       # Frontend API handlers
-├── data/               # Legal PDF Datasets
+├── start.bat           # One-click Launcher for Windows
+├── Dockerfile          # Automated Cloud Deployment configuration
 └── README.md           # Project Documentation
 ```
 
@@ -93,53 +94,44 @@ samvidhan-ai/
 | **AI Brain** | Llama 3.3 70B (Groq Cloud API) |
 | **Vector DB** | Pinecone (Serverless Vector Search) |
 | **Embeddings** | HuggingFace Sentence Transformers |
-| **Processing** | PyPDF (Server-side OCR) & HTML2PDF.js (Client-side Export) |
+| **Cloud Deployment** | Render.com & Docker |
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Installation & Setup (Local Use)
 
 ### Prerequisites
-* Python 3.11+
+* Python 3.10+
 * Groq API Key
 * Pinecone API Key
 
 ### Steps
-1.  **Clone the Repo:** ```bash
-    git clone (https://github.com/Priyanksolanki9853/NYAYA.ai)
-    cd samvidhan-ai
+1.  **Clone the Repo:** 
+    ```bash
+    git clone https://github.com/Mohitcoder5/NayaAi.git
+    cd NayaAi
     ```
-2.  **Install Backend Environment:** ```bash
-    cd backend
-    python -m venv venv
-    .\venv\Scripts\activate  # Windows
-    # source venv/bin/activate # Mac/Linux
-    pip install -r requirements.txt
-    ```
-3.  **Environment Variables:** Create a `.env` file in `backend/` and add:
+
+2.  **Environment Variables:** 
+    Open the `backend` folder, duplicate `.env.example` as `.env`, and add your API keys:
     ```env
     GROQ_API_KEY=your_key_here
     PINECONE_API_KEY=your_key_here
     ```
-4.  **Launch:** ```bash
-    # Start Backend
-    python -m uvicorn main:app --reload
-    ```
-    Open `frontend/index.html` in your browser to begin.
+
+3.  **Launch (Windows):** 
+    Simply double-click `start.bat` in the root folder. It will automatically create your virtual environment, install the dependencies, boot up the backend server, and open `http://127.0.0.1:8000` in your web browser!
 
 ---
 
 ## Roadmap & Future Vision
 
-[x] Phase 1: Core RAG pipeline and BNS/IPC mapping.
-
-[x] Phase 2: Automated Document Drafting.
-
-[ ] Phase 3: Support for 12+ regional Indian languages via Whisper API.
-
-[ ] Phase 4: Fine-tuning on 50,000+ landmark Supreme Court judgments.
-
-[ ] Phase 5: Mobile App (iOS/Android) using Flutter.
+- [x] Phase 1: Core RAG pipeline and BNS/IPC mapping.
+- [x] Phase 2: Automated Document Drafting.
+- [x] Phase 3: Single-click cloud deployment via Docker.
+- [ ] Phase 4: Support for 12+ regional Indian languages via Whisper API.
+- [ ] Phase 5: Fine-tuning on 50,000+ landmark Supreme Court judgments.
+- [ ] Phase 6: Mobile App (iOS/Android) using Flutter.
 
 ---
 
@@ -156,7 +148,7 @@ Contributions are welcome! 🚀
 ---
 
 ## 📜 Disclaimer
-*NYAYA.ai is an experimental tool provided for educational and informational purposes only. It does not constitute formal legal advice. Always consult a certified legal professional for official matters. Predictions made by the AI Judge are based on data patterns and do not guarantee actual court outcomes.*
+*NayaAi is an experimental tool provided for educational and informational purposes only. It does not constitute formal legal advice. Always consult a certified legal professional for official matters. Predictions made by the AI Judge are based on data patterns and do not guarantee actual court outcomes.*
 
 ---
 
@@ -168,15 +160,12 @@ This project is distributed under the **MIT License**. See the `LICENSE` file fo
 
 ## 📬 Contact
 
-**Priyank Solanki** 
+**Mohit** 
 
-* [**GitHub**](https://github.com/Priyanksolanki9853)
-* [**Email**](mailto:priyanksolanki9853@gmail.com)
+* [**GitHub - Mohitcoder5**](https://github.com/Mohitcoder5)
 
 ---
 
 <div align="center">
-  <sub>Built with 💻 & ☕ by Priyank Solanki. © 2025 All Rights Reserved.</sub>
+  <sub>Built with 💻 & ☕ by Mohit. © 2026 All Rights Reserved.</sub>
 </div>
-
----
